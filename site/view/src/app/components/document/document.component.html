@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-3">
+        <input type="number" (input)="changeCode($event.currentTarget.value)" [(ngModel)]="Document.code" class="form-control mb-1" placeholder="شماره پرونده" />
+        <input [(ngModel)]="Document.status" class="form-control mb-1" placeholder="وضعیت" />
+        <button class="btn btn-primary btn-block mt-1" (click)="save()">
+          {{ Document.id === -1 ? 'اضافه کردن' : 'ویرایش' }}
+        </button>
+        <div *ngIf="changerUser" class="alert alert-warning mt-2" role="alert">
+          <strong>توجه!</strong> این شماره پرونده قبلا توسط کاربر {{ changerUser }} ثبت شده است
+        </div>
+    </div>
+    <div class="col-9">
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th>ردیف</th>
+            <th>شماره پرونده</th>
+            <th>وضعیت</th>      
+            <th>عملیات</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let Document of Documents;let i = index">
+            <td>{{ i }}</td>
+            <td>{{ Document.code }}</td>
+            <td>{{ Document.status }}</td>
+            <th>
+                <i class="fa fa-trash text-danger mr-2 action-icon hover" (click)="delete(Document.id)"></i>
+                <i class="fa fa-edit text-info mr-2 action-icon hover" (click)="edit(Document)"></i>
+            </th>
+          </tr>
+        </tbody>
+    </table>
+    </div>
+  </div>

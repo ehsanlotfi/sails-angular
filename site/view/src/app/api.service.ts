@@ -6,6 +6,8 @@ const apiRouter = {
   users: `${BaseHttp}user`,
   tasks: `${BaseHttp}task`,
   activity: `${BaseHttp}activity`,
+  ie: `${BaseHttp}ie`,
+  document: `${BaseHttp}document`,
 };
 
 export interface User {
@@ -23,6 +25,21 @@ export interface Task {
   desc?: string;
   date?: string;
   activity?: Activity[];
+  user?: User;
+}
+
+export interface IE {
+  id?: number;
+  createdAt?: string;
+  entryTime?: string;
+  exitTime?: string;
+  user?: User;
+}
+
+export interface Document {
+  id?: number;
+  code?: string;
+  status?: string;
   user?: User;
 }
 
@@ -83,7 +100,7 @@ export class ApiService {
   }
 
 
-  
+  // Activity
   getAllActivitys(){
     return this.http.get(apiRouter.activity);
   }
@@ -104,7 +121,50 @@ export class ApiService {
     return this.http.put(`${apiRouter.activity}/${body.id}`, body);
   }
 
+  // IE
+  getAllIEs(){
+    return this.http.get(apiRouter.ie);
+  }
 
+  getAllIEsByUser(){
+    return this.http.get(apiRouter.ie);
+  }
 
+  insertIE(body: IE){
+  return  this.http.post(apiRouter.ie, body)
+  }
+
+  deleteIE(id){
+    return this.http.delete(`${apiRouter.ie}/${id}`);
+  }
+
+  updateIE(body: IE){
+    return this.http.put(`${apiRouter.ie}/${body.id}`, body);
+  }
+
+  // Document
+  getAllDocuments() {
+    return this.http.get(apiRouter.document);
+  }
+
+  getAllDocumentsByUser() {
+    return this.http.get(apiRouter.document);
+  }
+
+  insertDocument(body: Document) {
+  return  this.http.post(apiRouter.document, body)
+  }
+
+  deleteDocument(id) {
+    return this.http.delete(`${apiRouter.document}/${id}`);
+  }
+
+  updateDocument(body: Document) {
+    return this.http.put(`${apiRouter.document}/${body.id}`, body);
+  }
+
+  findByCodeDocument(code: number) {
+    return this.http.get(`${apiRouter.document}/?where={"code":"${code}"}`);
+  }
 
 }

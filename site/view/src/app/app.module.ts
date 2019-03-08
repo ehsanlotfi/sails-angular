@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {DpDatePickerModule} from 'ng2-jalali-date-picker';
 import { Router } from "@angular/router";
 import { ActivityComponent } from './components/activity/activity.component';
+import { IEComponent } from './components/IE/ie.component';
+import { DocumentComponent } from './components/document/document.component';
 
 @Component({
 selector : 'app-root',
@@ -25,7 +27,9 @@ class AppComponent {
     UsersComponent,
     TasksComponent,
     LoginComponent,
-    ActivityComponent
+    ActivityComponent,
+    IEComponent,
+    DocumentComponent
   ],
   imports: [
     BrowserModule,
