@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-3">
+    
+      <input [(ngModel)]="user.name" class="form-control" placeholder="نام" />
+      <input [(ngModel)]="user.LastName" class="form-control mt-1" placeholder="نام خانوادگی" />
+      <input [(ngModel)]="user.code" class="form-control mt-1" placeholder="کد پرسنلی" />
+      <input [(ngModel)]="user.pass" class="form-control mt-1" placeholder="رمز ورود" />
+          <select class="form-control mt-1" [(ngModel)]="user.role">
+            <option value="0">مدیر</option>
+            <option value="1">پشتیبان</option>
+            <option value="2">کاربر</option>
+          </select>
+      <button class="btn btn-primary btn-block mt-1" (click)="save()">
+        {{ user.id === -1 ? 'اضافه کردن' : 'ویرایش' }}
+      </button>
+    
+  </div>
+  <div class="col-9">
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th>ردیف</th>
+          <th>نام</th>
+          <th>نام خانوادگی</th>
+          <th>کد پرسنلی</th>
+          <th>رمز ورود</th>
+          <th>نقش</th>
+          <th>عملیات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users;let i = index">
+          <td>{{ i }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.LastName }}</td>
+          <td>{{ user.code }}</td>
+          <td>{{ user.pass }}</td>
+          <td>
+              <label *ngIf="user.role === '0'">مدیر</label>
+              <label *ngIf="user.role === '1'">پشتیبان</label>
+              <label *ngIf="user.role === '2'">کاربر</label>
+          </td>
+          <th>
+            <i class="fa fa-trash text-danger mr-2 action-icon hover" (click)="delete(user.id)"></i>
+            <i class="fa fa-edit text-info mr-2 action-icon hover" (click)="edit(user)"></i>
+            <i class="fa fa-eye text-warning mr-2 action-icon hover" [routerLink]="['/tasks', user.id]"></i>
+          </th>
+        </tr>
+      </tbody>
+  </table>
+  </div>
+</div>
