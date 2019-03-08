@@ -1,12 +1,13 @@
 <div class="row">
     <div class="col-3">
         <input type="number" (input)="changeCode($event.currentTarget.value)" [(ngModel)]="Document.code" class="form-control mb-1" placeholder="شماره پرونده" />
+        <input [(ngModel)]="Document.count" class="form-control mb-1" placeholder="تعداد" />
         <input [(ngModel)]="Document.status" class="form-control mb-1" placeholder="وضعیت" />
         <button class="btn btn-primary btn-block mt-1" (click)="save()">
           {{ Document.id === -1 ? 'اضافه کردن' : 'ویرایش' }}
         </button>
-        <div *ngIf="changerUser" class="alert alert-warning mt-2" role="alert">
-          <strong>توجه!</strong> این شماره پرونده قبلا توسط کاربر {{ changerUser }} ثبت شده است
+        <div *ngIf="changerUser.name" class="alert alert-warning mt-2" role="alert">
+          <strong>توجه!</strong> این شماره پرونده قبلا توسط کاربر {{ changerUser.name }} {{ changerUser.status }} شده است
         </div>
     </div>
     <div class="col-9">
@@ -15,6 +16,7 @@
           <tr>
             <th>ردیف</th>
             <th>شماره پرونده</th>
+            <th>تعداد </th>
             <th>وضعیت</th>      
             <th>عملیات</th>
           </tr>
@@ -23,6 +25,7 @@
           <tr *ngFor="let Document of Documents;let i = index">
             <td>{{ i }}</td>
             <td>{{ Document.code }}</td>
+            <td>{{ Document.count }}</td>
             <td>{{ Document.status }}</td>
             <th>
                 <i class="fa fa-trash text-danger mr-2 action-icon hover" (click)="delete(Document.id)"></i>

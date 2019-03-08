@@ -46,6 +46,7 @@ export class IEComponent extends Auth  implements OnInit {
       id : this.IE.id,
       entryTime : this.IE.entryTime,
       exitTime : this.IE.exitTime,
+      user: (this.api.loginId as any)
     }
     debugger;
     if(this.IE.id === -1){
@@ -72,6 +73,7 @@ export class IEComponent extends Auth  implements OnInit {
         id: IE.id,
         entryTime: IE.entryTime,
         exitTime: IE.exitTime,
+        user: (this.api.loginId as any)
       }
     }
 }

@@ -10,6 +10,7 @@ module.exports = {
   attributes: {
     code: { type: 'string'},
     status: { type: 'string'},
+	count: { type: 'number'},
     user: {
       model: 'User'
     },

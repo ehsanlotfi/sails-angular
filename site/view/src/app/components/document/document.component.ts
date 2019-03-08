@@ -13,7 +13,7 @@ export class DocumentComponent extends Auth  implements OnInit {
   Documents: Document[];
   Document: Document;
   userId;
-  changerUser;
+  changerUser = {};
   constructor(
     public api: ApiService, 
     public router: Router,
@@ -46,7 +46,10 @@ export class DocumentComponent extends Auth  implements OnInit {
     this.changerUser = '';
       this.api.findByCodeDocument(+e).subscribe((f: any)=>{
         if(f.length){
-            this.changerUser = f[0].user.name;
+            this.changerUser = {
+                name :   f[0].user.name,
+                status: f[0].status
+            }
         }
       })
   }
@@ -56,6 +59,7 @@ export class DocumentComponent extends Auth  implements OnInit {
       id : this.Document.id,
       code : this.Document.code,
       status : this.Document.status,
+      count : this.Document.count,
       user: (this.api.loginId as any)
     }
     if(this.Document.id === -1){
@@ -82,6 +86,7 @@ export class DocumentComponent extends Auth  implements OnInit {
         id: Document.id,
         code: Document.code,
         status: Document.status,
+        count: Document.count,
       }
     }
 }

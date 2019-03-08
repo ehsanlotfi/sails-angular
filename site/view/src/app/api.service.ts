@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import * as moment from 'jalali-moment';
 
 const BaseHttp =  'http://localhost:1337/';
 const apiRouter = {
@@ -40,6 +41,7 @@ export interface Document {
   id?: number;
   code?: string;
   status?: string;
+  count?: number;
   user?: User;
 }
 
@@ -126,8 +128,8 @@ export class ApiService {
     return this.http.get(apiRouter.ie);
   }
 
-  getAllIEsByUser(){
-    return this.http.get(apiRouter.ie);
+  getAllIEByUserID(id: number) {
+    return this.http.get(`${apiRouter.ie}?where={"user": ${id} }`);
   }
 
   insertIE(body: IE){
@@ -147,8 +149,8 @@ export class ApiService {
     return this.http.get(apiRouter.document);
   }
 
-  getAllDocumentsByUser() {
-    return this.http.get(apiRouter.document);
+  getAllDocumentsByUserID(id: number) {
+    return this.http.get(`${apiRouter.document}?where={"user": ${id} }`);
   }
 
   insertDocument(body: Document) {
@@ -167,4 +169,8 @@ export class ApiService {
     return this.http.get(`${apiRouter.document}/?where={"code":"${code}"}`);
   }
 
+  // tools
+  getTimeStampToJalali(date){
+    return moment(date).locale("fa").format("MM/DD/YYYY")
+  }
 }

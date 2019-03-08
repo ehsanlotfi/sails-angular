@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService, Task, Activity } from 'src/app/api.service';
+import { ApiService, Task, Activity, IE, Document } from 'src/app/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { forkJoin, of } from 'rxjs';
+import * as moment from 'jalali-moment';
 import { Auth } from '../auth';
 
 @Component({
@@ -10,7 +12,7 @@ import { Auth } from '../auth';
 })
 export class TasksComponent extends Auth  implements OnInit {
 
-  tasks: Task[];
+  tasks: any[];
   task: Task;
   activitys: Activity[];
   userId;
@@ -34,24 +36,26 @@ export class TasksComponent extends Auth  implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      if(params && params.id){
-          this.userId = params.id;
-          this.api.getAllActivitys().subscribe((res: Activity[])=>{
-            this.activitys = res;
-          })
-      } else {
-        this.router.navigate(['/users'])
-      }
-  });
     this.resetTask();
     this.getAllTasks();
   }
 
   getAllTasks(){
-    this.api.getAllTasks().subscribe((res:Task[])=>{
-      this.tasks = res;
-      
+    forkJoin(
+      this.api.getAllIEByUserID(+this.api.loginId),
+      this.api.getAllDocumentsByUserID(+this.api.loginId)
+    ).subscribe(([ies ,docs]:[ any ,any ])=> {
+      var dt = moment;
+      docs.map((f: any) => {
+        const ie = ies.filter((e: any)=>
+        dt(e.createdAt).format("MM/DD/YYYY") === dt(f.createdAt).format("MM/DD/YYYY"))[0];
+        if(ie){
+          f.entryTime = ie.entryTime;
+          f.exitTime = ie.exitTime;
+        }
+          return f;
+      });
+      this.tasks = docs;
     })
   }
 
