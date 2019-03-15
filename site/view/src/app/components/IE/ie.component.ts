@@ -76,4 +76,8 @@ export class IEComponent extends Auth  implements OnInit {
         user: (this.api.loginId as any)
       }
     }
+
+    getFullTime(start,end){
+      return (+(end.replace(":","."))) - (+(start.replace(":",".")));
+    }
 }

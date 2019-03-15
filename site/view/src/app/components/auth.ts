@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 
 export class Auth {
     constructor(public api: ApiService, public route: Router){
-     if(api.loginId === -1){
-       this.route.navigate(['login']);
+     if(api.user.loginId === -1){
+       // this.route.navigate(['login']);
      }
     }
 }

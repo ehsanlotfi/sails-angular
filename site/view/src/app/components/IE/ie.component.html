@@ -12,7 +12,8 @@
           <tr>
             <th>ردیف</th>
             <th>ساعت ورود</th>
-            <th>ساعت خروج</th>      
+            <th>ساعت خروج</th>   
+            <th>کارکرد نهایی</th>      
             <th>عملیات</th>
           </tr>
         </thead>
@@ -21,6 +22,7 @@
             <td>{{ i }}</td>
             <td>{{ IE.entryTime }}</td>
             <td>{{ IE.exitTime }}</td>
+            <td>{{ getFullTime(IE.entryTime, IE.exitTime) }}</td>
             <th>
                 <i class="fa fa-trash text-danger mr-2 action-icon hover" (click)="delete(IE.id)"></i>
                 <i class="fa fa-edit text-info mr-2 action-icon hover" (click)="edit(IE)"></i>

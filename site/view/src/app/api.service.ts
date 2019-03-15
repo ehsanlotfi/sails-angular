@@ -40,7 +40,10 @@ export interface IE {
 export interface Document {
   id?: number;
   code?: string;
+  class?: string;
+  formNumber?: string;
   status?: string;
+  date?: string;
   count?: number;
   user?: User;
 }
@@ -57,8 +60,11 @@ export interface Activity {
 })
 export class ApiService {
 
-  loginId = -1;
-  
+  user= {
+    loginId : -1,
+    userName: '',
+    role: -1
+  }  
   constructor(private http: HttpClient) { }
 
   getAllUsers(){

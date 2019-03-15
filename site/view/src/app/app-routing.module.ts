@@ -6,16 +6,25 @@ import { LoginComponent } from './components/login/login.component';
 import { ActivityComponent } from './components/activity/activity.component';
 import { IEComponent } from './components/IE/ie.component';
 import { DocumentComponent } from './components/document/document.component';
+import { AppLayoutComponent } from './components/app-layout/app-layout.component';
+import { Page404Component } from './components/page-404/page-404.component';
 
-const routes: Routes = [
-  { path :'' ,redirectTo : 'users' , pathMatch :'full' },
+const app: Routes = [
   { path :'users' , component : UsersComponent },
   { path :'tasks/:id' , component : TasksComponent },
   { path :'activity' , component : ActivityComponent },
-  { path :'login' , component : LoginComponent },
   { path :'ie' , component : IEComponent },
   { path :'document' , component : DocumentComponent }
 ];
+
+const routes: Routes = [
+  { path : '' , redirectTo : 'login' , pathMatch :'full' },
+  { path :'login' , component : LoginComponent },
+  { path :'app' , component : AppLayoutComponent,  children: app },
+  { path :'**' , component : Page404Component }
+];
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -28,7 +28,7 @@
             <th>در تاریخ</th>
             <th>ساعت ورود</th>
             <th>ساعت خروج</th>
-            <th>عملیات</th>
+            <th>کارکرد نهایی</th>
           </tr>
         </thead>
         <tbody>
@@ -41,10 +41,7 @@
             <td>{{ api.getTimeStampToJalali(task.createdAt) }}</td>
             <td>{{ task.entryTime }}</td>
             <td>{{ task.exitTime }}</td>
-            <th>
-                <i class="fa fa-trash text-danger mr-2 action-icon hover" (click)="delete(task.id)"></i>
-                <!-- <i class="fa fa-edit text-info mr-2 action-icon hover" (click)="edit(task)"></i> -->
-            </th>
+            <td>{{ getFullTime(task.entryTime, task.exitTime) }}</td>
           </tr>
         </tbody>
     </table>

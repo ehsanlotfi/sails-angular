@@ -42,8 +42,8 @@ export class TasksComponent extends Auth  implements OnInit {
 
   getAllTasks(){
     forkJoin(
-      this.api.getAllIEByUserID(+this.api.loginId),
-      this.api.getAllDocumentsByUserID(+this.api.loginId)
+      this.api.getAllIEByUserID(+this.api.user.loginId),
+      this.api.getAllDocumentsByUserID(+this.api.user.loginId)
     ).subscribe(([ies ,docs]:[ any ,any ])=> {
       var dt = moment;
       docs.map((f: any) => {
@@ -92,4 +92,9 @@ export class TasksComponent extends Auth  implements OnInit {
         desc: Task.desc
       }
     }
+
+    getFullTime(start,end){
+      return (+(end.replace(":","."))) - (+(start.replace(":",".")));
+    }
+
 }

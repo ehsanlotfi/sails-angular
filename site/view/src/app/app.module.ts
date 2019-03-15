@@ -12,6 +12,8 @@ import { Router } from "@angular/router";
 import { ActivityComponent } from './components/activity/activity.component';
 import { IEComponent } from './components/IE/ie.component';
 import { DocumentComponent } from './components/document/document.component';
+import { AppLayoutComponent } from './components/app-layout/app-layout.component';
+import { Page404Component } from './components/page-404/page-404.component';
 
 @Component({
 selector : 'app-root',
@@ -29,7 +31,9 @@ class AppComponent {
     LoginComponent,
     ActivityComponent,
     IEComponent,
-    DocumentComponent
+    DocumentComponent,
+    AppLayoutComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,

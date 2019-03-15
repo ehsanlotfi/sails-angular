@@ -9,8 +9,11 @@ module.exports = {
 
   attributes: {
     code: { type: 'string'},
+    class: { type: 'string'},
+    formNumber: { type: 'string'},
     status: { type: 'string'},
-	count: { type: 'number'},
+    date: { type: 'string' },
+ 	  count: { type: 'number'},
     user: {
       model: 'User'
     },
