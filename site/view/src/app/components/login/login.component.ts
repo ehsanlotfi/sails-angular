@@ -11,8 +11,8 @@ export class LoginComponent  implements OnInit {
 
   error = false;
   user: User = {
-    code: null,
-    pass : null
+    code: 8633,
+    pass : '1234'
   }
  
   constructor(private api: ApiService, private route: Router) { }
@@ -26,7 +26,7 @@ export class LoginComponent  implements OnInit {
          this.api.user = {
           loginId: res[0].id,
           role : res[0].role,
-          userName: res[0].name + res[0].LastName
+          userName: res[0].name +' '+ res[0].LastName
          }
          if(+res[0].role === 0){
           this.route.navigate(['app/users']);

@@ -32,8 +32,10 @@ export interface Task {
 export interface IE {
   id?: number;
   createdAt?: string;
+  updatedAt?: string;
   entryTime?: string;
   exitTime?: string;
+  walk?: number;
   user?: User;
 }
 
@@ -130,7 +132,11 @@ export class ApiService {
   }
 
   // IE
-  getAllIEs(){
+  getAllIEs(id: number){
+    return this.http.get(`${apiRouter.ie}?where={"user": "${id}" }`);
+  }
+
+  getFullAllIEs(){
     return this.http.get(apiRouter.ie);
   }
 
@@ -171,12 +177,20 @@ export class ApiService {
     return this.http.put(`${apiRouter.document}/${body.id}`, body);
   }
 
-  findByCodeDocument(code: number) {
+  findByCodeDocument(code: string) {
     return this.http.get(`${apiRouter.document}/?where={"code":"${code}"}`);
+  }
+
+  findByFormNumberDocument(formNumber: string) {
+    return this.http.get(`${apiRouter.document}/?where={"formNumber":"${formNumber}"}`);
+  }
+
+   findByDateDocument(date: string) {
+    return this.http.get(`${apiRouter.document}/?where={"date":"${date}"}`);
   }
 
   // tools
   getTimeStampToJalali(date){
-    return moment(date).locale("fa").format("MM/DD/YYYY")
+    return moment(date).locale("fa").format("DD/MM/YYYY")
   }
 }

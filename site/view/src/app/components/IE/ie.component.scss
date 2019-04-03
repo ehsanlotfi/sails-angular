@@ -1,3 +1,28 @@
 th , td{
     text-align: right
 }
+.col-3{
+    span{
+        float: right;
+    }
+}
+.time-24 {
+    direction: ltr;
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #bbb;
+    padding: 0 5px;
+    float: left;
+
+    input {
+        border: none;
+        outline: none;
+
+    }
+}
+
+.walk{
+    float: left;
+    width: 147px;
+    margin-bottom: 10px;
+}

@@ -3,18 +3,20 @@
       <div class="row">
           <div class="col-4 d-inline-flex">
               <span class="ml-1 mt-1 text-left w-50">کد ممیزی</span>
-              <input type="number" (input)="changeCode($event.currentTarget.value)" 
+              <input type="text" (input)="changeCode($event.currentTarget.value)" 
               [(ngModel)]="Document.code" class="form-control form-control-sm  mb-1"  />
           </div>
           <div class="col-4 d-inline-flex">
               <span class="ml-1 mt-1 text-left w-50">کلاسه</span>
-              <input type="number" 
+              <input type="text" 
               [(ngModel)]="Document.class" class="form-control form-control-sm  mb-1"  />
           </div>
           <div class="col-4 d-inline-flex">
               <span class="ml-1 mt-1 text-left w-50">شماره فرم</span>
-              <input type="number" 
-              [(ngModel)]="Document.formNumber" class="form-control form-control-sm  mb-1"  />
+              <input type="text" 
+              [(ngModel)]="Document.formNumber" 
+              (input)="changeFormNumber($event.currentTarget.value)"
+              class="form-control form-control-sm  mb-1"  />
           </div>
           <div class="col-4 d-inline-flex">
               <span class="ml-1 mt-1 text-left w-50">ثبت وضعیت</span>
@@ -30,14 +32,15 @@
               [(ngModel)]="Document.date"
               mode="day"
               theme="dp-material"
+              (onChange)="changeDate($event)"
               placeholder="در زمان"></dp-date-picker>
           </div>
           <div class="col-4 text-left">
-              <button [disabled]="changerUser.name" class="btn btn-primary  mt-1" (click)="save()">
+              <button [disabled]="changerUser && changerUser.name" class="btn btn-primary  mt-1" (click)="save()">
                   {{ Document.id === -1 ? 'اضافه کردن' : 'ویرایش' }}
                 </button>
           </div>
-          <div *ngIf="changerUser.name" class="col-12">
+          <div *ngIf="changerUser && changerUser.name" class="col-12">
               <div  class="alert alert-warning mt-2" role="alert">
                   <strong>توجه!</strong> این شماره پرونده قبلا توسط کاربر {{ changerUser.name }} {{ changerUser.status }} شده است
                 </div>
@@ -53,22 +56,24 @@
             <th>کلاسه </th>
             <th>وضعیت</th>      
             <th>شماره فرم</th>
-            <th>ثبت شده توسط</th>    
-            <th>عملیات</th>
+            <th>ثبت شده توسط</th> 
+            <th>تاریخ ثبت</th>   
+            <!-- <th>عملیات</th> -->
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let Document of Documents;let i = index">
-            <td>{{ i }}</td>
+            <td>{{ i + 1 }}</td>
             <td>{{ Document.code }}</td>
             <td>{{ Document.class }}</td>
             <td>{{ Document.status }}</td>
             <td>{{ Document.formNumber }}</td>
-            <td>{{ Document.user.name }}</td>
-            <th>
+            <td>{{ Document.user.name+ ' ' + Document.user.LastName }}</td>
+            <td>{{ Document.date }}</td>
+            <!-- <th>
                 <i class="fa fa-trash text-danger mr-2 action-icon hover" (click)="delete(Document.id)"></i>
                 <i class="fa fa-edit text-info mr-2 action-icon hover" (click)="edit(Document)"></i>
-            </th>
+            </th> -->
           </tr>
         </tbody>
     </table>

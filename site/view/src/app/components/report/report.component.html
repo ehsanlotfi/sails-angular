@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-12">
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th>ردیف</th>
+          <th>کد پرسنلی</th>
+          <th>نام و نام خانوادگی</th>
+          <th>تاریخ</th>
+          <th>ساعت ورود1</th>
+          <th>ساعت خروج1</th>   
+          <th>ساعت ورود2</th>
+          <th>ساعت خروج2</th>  
+          <th>ایاب و ذهاب</th>   
+          <th>کارکرد نهایی</th> 
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let IE of groupUsers;let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ IE.user.code }}</td>
+          <td>{{ IE.user.name + ' ' + IE.user.LastName }}</td>
+          <td>{{ api.getTimeStampToJalali(IE.updatedAt) }}</td>
+          <td>{{ IE.entryTime1 }}</td>
+          <td>{{ IE.exitTime1 }}</td>
+          <td>{{ IE.entryTime2 }}</td>
+          <td>{{ IE.exitTime2 }}</td>
+          <td>{{ IE.walk  }}</td>
+          <td>{{ IE.fullTime  }}</td>
+        </tr>
+      </tbody>
+  </table>
+  </div>
+</div>

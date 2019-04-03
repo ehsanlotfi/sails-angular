@@ -10,6 +10,7 @@ module.exports = {
   attributes: {
     entryTime: { type: 'string'},
     exitTime: { type: 'string'},
+    walk: { type: 'number'},
     user: {
       model: 'User'
     },

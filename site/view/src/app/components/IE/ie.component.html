@@ -1,31 +1,61 @@
 <div class="row">
     <div class="col-3">
-        <input type="time" [(ngModel)]="IE.entryTime" class="form-control mb-1" placeholder="ساعت ورود" />
-        <input type="time" [(ngModel)]="IE.exitTime" class="form-control mb-1" placeholder="ساعت خروج" />
+
+    <div class="mb-3">
+        <span class=" mb-2">ساعت ورود:</span>
+     <div class="time-24 mb-2">
+        <input type="number" min="0" max="23"  [(ngModel)]="entryHours">:
+        <input type="number" min="0" max="59"  [(ngModel)]="entryMinuts">
+     </div>
+    </div>
+
+      <div>
+          <span class=" mb-2">ساعت خروج:</span>
+        <div class="time-24 mb-2">
+          <input type="number" min="0" max="23"  [(ngModel)]="exitHours">:
+          <input type="number" min="0" max="59"  [(ngModel)]="exitMinuts">
+        </div>
+      </div>
+
+      <div>
+        <span>ایاب ذهاب</span>
+        <select class="walk"  [(ngModel)]="IE.walk">
+          <option value="0.5">30 دقیقه</option>
+          <option value="1">1 ساعت</option>
+        </select>
+      </div>
+
         <button class="btn btn-primary btn-block mt-1" (click)="save()">
           {{ IE.id === -1 ? 'اضافه کردن' : 'ویرایش' }}
         </button>
     </div>
-    <div class="col-9">
+    <div class="col-12 mt-3">
       <table class="table table-dark table-striped">
         <thead>
           <tr>
             <th>ردیف</th>
-            <th>ساعت ورود</th>
-            <th>ساعت خروج</th>   
+            <th>تاریخ</th>
+            <th>ساعت ورود1</th>
+            <th>ساعت خروج1</th>   
+            <th>ساعت ورود2</th>
+            <th>ساعت خروج2</th>  
+            <th>ایاب و ذهاب</th>   
             <th>کارکرد نهایی</th>      
             <th>عملیات</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let IE of IEs;let i = index">
-            <td>{{ i }}</td>
-            <td>{{ IE.entryTime }}</td>
-            <td>{{ IE.exitTime }}</td>
-            <td>{{ getFullTime(IE.entryTime, IE.exitTime) }}</td>
+          <tr *ngFor="let IE of groupIEs;let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ api.getTimeStampToJalali(IE.updatedAt) }}</td>
+            <td>{{ IE.entryTime1 }}</td>
+            <td>{{ IE.exitTime1 }}</td>
+            <td>{{ IE.entryTime2 }}</td>
+            <td>{{ IE.exitTime2 }}</td>
+            <td>{{ IE.walk  }}</td>
+            <td>{{ IE.fullTime  }}</td>
             <th>
                 <i class="fa fa-trash text-danger mr-2 action-icon hover" (click)="delete(IE.id)"></i>
-                <i class="fa fa-edit text-info mr-2 action-icon hover" (click)="edit(IE)"></i>
             </th>
           </tr>
         </tbody>

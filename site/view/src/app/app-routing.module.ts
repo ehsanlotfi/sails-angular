@@ -8,13 +8,15 @@ import { IEComponent } from './components/IE/ie.component';
 import { DocumentComponent } from './components/document/document.component';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
 import { Page404Component } from './components/page-404/page-404.component';
+import { ReportComponent } from './components/report/report.component';
 
 const app: Routes = [
   { path :'users' , component : UsersComponent },
   { path :'tasks/:id' , component : TasksComponent },
   { path :'activity' , component : ActivityComponent },
   { path :'ie' , component : IEComponent },
-  { path :'document' , component : DocumentComponent }
+  { path :'document' , component : DocumentComponent },
+  { path :'report' , component : ReportComponent }
 ];
 
 const routes: Routes = [

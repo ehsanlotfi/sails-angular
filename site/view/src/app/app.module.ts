@@ -14,12 +14,13 @@ import { IEComponent } from './components/IE/ie.component';
 import { DocumentComponent } from './components/document/document.component';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
 import { Page404Component } from './components/page-404/page-404.component';
+import { ReportComponent } from './components/report/report.component';
 
 @Component({
 selector : 'app-root',
 templateUrl: 'master.html'
 })
-class AppComponent {
+export class AppComponent {
   constructor(private router: Router){ }
 }
 
@@ -33,7 +34,8 @@ class AppComponent {
     IEComponent,
     DocumentComponent,
     AppLayoutComponent,
-    Page404Component
+    Page404Component,
+    ReportComponent
   ],
   imports: [
     BrowserModule,

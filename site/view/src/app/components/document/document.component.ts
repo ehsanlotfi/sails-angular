@@ -13,7 +13,7 @@ export class DocumentComponent extends Auth  implements OnInit {
   Documents: Document[];
   Document: Document;
   userId;
-  changerUser = {};
+  changerUser = { name: '', status: ''};
   constructor(
     public api: ApiService, 
     public router: Router,
@@ -35,7 +35,7 @@ export class DocumentComponent extends Auth  implements OnInit {
 
   ngOnInit() {
     this.resetDocument();
-    this.getAllDocuments();
+  //  this.getAllDocuments();
   }
 
   getAllDocuments(){
@@ -46,16 +46,24 @@ export class DocumentComponent extends Auth  implements OnInit {
   }
 
   changeCode(e){
-    this.changerUser = '';
-      this.api.findByCodeDocument(+e).subscribe((f: any)=>{
-        if(f.length){
-            this.changerUser = {
-                name :  f[0].user.name,
-                status: f[0].status
-            }
-        }
+      this.api.findByCodeDocument(e).subscribe((f: any)=>{
+        this.Documents = f;
       })
   }
+
+  changeFormNumber(e){
+      this.api.findByFormNumberDocument(e).subscribe((f: any)=>{
+        this.Documents = f;
+      })
+  }
+
+  changeDate(e){
+    this.api.findByDateDocument(e).subscribe((f: any)=>{
+      this.Documents = f;
+    })
+  }
+
+
 
   save(){
     const body: Document = {
@@ -65,16 +73,16 @@ export class DocumentComponent extends Auth  implements OnInit {
       class : this.Document.class,
       formNumber: this.Document.formNumber,
       date : this.Document.date,
-      user: (this.api.loginId as any)
+      user: (this.api.user.loginId as any)
     }
     if(this.Document.id === -1){
       delete body.id;
       this.api.insertDocument(body).subscribe((res)=>{
-        this.getAllDocuments();
+        //this.getAllDocuments();
       });
     } else {
       this.api.updateDocument(body).subscribe((res)=>{
-        this.getAllDocuments();
+       // this.getAllDocuments();
       });
     }
     this.resetDocument();
@@ -82,7 +90,7 @@ export class DocumentComponent extends Auth  implements OnInit {
 
     delete(id){
       this.api.deleteDocument(id).subscribe((res)=>{
-        this.getAllDocuments();
+        //this.getAllDocuments();
       });
     }
 
