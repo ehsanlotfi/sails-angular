@@ -13,6 +13,10 @@
           <th>ساعت خروج2</th>  
           <th>ایاب و ذهاب</th>   
           <th>کارکرد نهایی</th> 
+          <th>فعالیت ها</th>
+          <th>
+            <i class="fa fa-file-excel h3 text-white hover" (click)="exportExcel()"></i>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -27,6 +31,16 @@
           <td>{{ IE.exitTime2 }}</td>
           <td>{{ IE.walk  }}</td>
           <td>{{ IE.fullTime  }}</td>
+          <td>
+            <div *ngFor="let doc of IE.docs">
+              <span>{{ doc.name }}</span>
+              <span>{{ doc.count }}</span> مورد به مدت
+              <span>{{ doc.time }}</span> ساعت 
+            </div>
+          </td>
+          <td>
+            <button [class.btn-success]="IE.check" (click)="check(IE.id);IE.check = true"><i class="fa fa-check"></i></button>
+          </td>
         </tr>
       </tbody>
   </table>

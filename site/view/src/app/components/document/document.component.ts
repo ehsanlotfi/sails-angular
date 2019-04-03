@@ -30,6 +30,7 @@ export class DocumentComponent extends Auth  implements OnInit {
       class:'',
       date:'',
       formNumber:'',
+      hour: 1
     }
   }
 
@@ -73,7 +74,8 @@ export class DocumentComponent extends Auth  implements OnInit {
       class : this.Document.class,
       formNumber: this.Document.formNumber,
       date : this.Document.date,
-      user: (this.api.user.loginId as any)
+      user: (this.api.user.loginId as any),
+      hour: this.Document.hour
     }
     if(this.Document.id === -1){
       delete body.id;
@@ -101,6 +103,20 @@ export class DocumentComponent extends Auth  implements OnInit {
         status: Document.status,
         class: Document.class,
         formNumber: Document.formNumber,
+        hour: this.Document.hour
+      }
+    }
+
+    getfillAll() {
+      if(this.Document.code
+      && this.Document.status
+      && this.Document.class
+      && this.Document.formNumber
+      && this.Document.date
+      && this.Document.hour){
+        return true;
+      } else {
+        return false;
       }
     }
 }

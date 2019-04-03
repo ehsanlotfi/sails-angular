@@ -11,6 +11,7 @@ module.exports = {
     entryTime: { type: 'string'},
     exitTime: { type: 'string'},
     walk: { type: 'number'},
+    check: { type: 'boolean'},
     user: {
       model: 'User'
     },

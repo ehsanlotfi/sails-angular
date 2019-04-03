@@ -13,7 +13,8 @@ module.exports = {
     formNumber: { type: 'string'},
     status: { type: 'string'},
     date: { type: 'string' },
- 	  count: { type: 'number'},
+    count: { type: 'number'},
+    hour: { type: 'number'},
     user: {
       model: 'User'
     },

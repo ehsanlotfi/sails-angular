@@ -35,8 +35,14 @@
               (onChange)="changeDate($event)"
               placeholder="در زمان"></dp-date-picker>
           </div>
-          <div class="col-4 text-left">
-              <button [disabled]="changerUser && changerUser.name" class="btn btn-primary  mt-1" (click)="save()">
+          <div class="col-4 d-inline-flex">
+            <span class="ml-1 mt-1 text-left w-50"  [style.fontSize.px]="15">مدت زمان(ساعت)</span>
+            <input type="text" 
+            [(ngModel)]="Document.hour"
+            class="form-control form-control-sm  mb-1"  />
+          </div>
+          <div class="col-12 text-left">
+              <button [disabled]="!getfillAll()" class="btn btn-primary  mt-1" (click)="save()">
                   {{ Document.id === -1 ? 'اضافه کردن' : 'ویرایش' }}
                 </button>
           </div>
