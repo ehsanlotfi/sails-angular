@@ -11,8 +11,8 @@ export class LoginComponent  implements OnInit {
 
   error = false;
   user: User = {
-    code: 8633,
-    pass : '1234'
+    code: null,
+    pass : null
   }
  
   constructor(private api: ApiService, private route: Router) { }

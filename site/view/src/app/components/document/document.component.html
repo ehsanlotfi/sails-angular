@@ -46,11 +46,18 @@
                   {{ Document.id === -1 ? 'اضافه کردن' : 'ویرایش' }}
                 </button>
           </div>
-          <div *ngIf="changerUser && changerUser.name" class="col-12">
+          <div [class.d-none]="!duplicateForm"  class="col-12">
               <div  class="alert alert-warning mt-2" role="alert">
-                  <strong>توجه!</strong> این شماره پرونده قبلا توسط کاربر {{ changerUser.name }} {{ changerUser.status }} شده است
+                  <strong>توجه!</strong> کد ممیزی و یا شماره فرم تکراری است برای ثبت مطمئن هستید؟
                 </div>
           </div>
+
+          <div [class.d-none]="!formSuccess" class="col-12">
+            <div  class="alert alert-success mt-2" role="alert">
+                <strong>موفقیت آمیز!</strong> ثبت فرم با موفقیت انجام شد
+            </div>
+        </div>
+
         </div>
   </div>
     <div class="col-12">

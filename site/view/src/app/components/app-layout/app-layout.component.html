@@ -6,7 +6,7 @@
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mt-2 mt-md-0">
-      <li *ngIf="api.user.role === 0" class="nav-item hover" routerLink="/app/users">
+      <li *ngIf="api.user.role === '0'" class="nav-item hover" routerLink="/app/users">
         <a class="nav-link" >کاربران</a>
       </li>
       <li class="nav-item hover" routerLink="/app/document">
@@ -15,7 +15,7 @@
       <li class="nav-item hover" routerLink="/app/ie">
         <a class="nav-link" >ورود و خروج </a>
       </li>
-      <li class="nav-item hover" routerLink="/app/report">
+      <li *ngIf="api.user.role === '0'"  class="nav-item hover" routerLink="/app/report">
         <a class="nav-link" >گزارش </a>
       </li>
     </ul>

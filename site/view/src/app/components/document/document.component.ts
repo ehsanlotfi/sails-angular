@@ -13,6 +13,8 @@ export class DocumentComponent extends Auth  implements OnInit {
   Documents: Document[];
   Document: Document;
   userId;
+  formSuccess = false;
+  duplicateForm = false;
   changerUser = { name: '', status: ''};
   constructor(
     public api: ApiService, 
@@ -48,14 +50,24 @@ export class DocumentComponent extends Auth  implements OnInit {
 
   changeCode(e){
       this.api.findByCodeDocument(e).subscribe((f: any)=>{
+        this.duplicateFormCheck(f);
         this.Documents = f;
       })
   }
 
   changeFormNumber(e){
-      this.api.findByFormNumberDocument(e).subscribe((f: any)=>{
+      this.api.findByFormNumberDocument(e).subscribe((f: any)=>{ 
+        this.duplicateFormCheck(f);
         this.Documents = f;
       })
+  }
+
+  duplicateFormCheck(f){
+    if(f.length){
+      this.duplicateForm = true;
+    } else {
+      this.duplicateForm = false;
+    }
   }
 
   changeDate(e){
@@ -80,10 +92,12 @@ export class DocumentComponent extends Auth  implements OnInit {
     if(this.Document.id === -1){
       delete body.id;
       this.api.insertDocument(body).subscribe((res)=>{
+        this.submitTrue();
         //this.getAllDocuments();
       });
     } else {
       this.api.updateDocument(body).subscribe((res)=>{
+        this.submitTrue();
        // this.getAllDocuments();
       });
     }
@@ -118,5 +132,12 @@ export class DocumentComponent extends Auth  implements OnInit {
       } else {
         return false;
       }
+    }
+
+    submitTrue(){
+      this.formSuccess = true;
+      setTimeout(()=>{
+        this.formSuccess = false;
+      }, 2000)
     }
 }
