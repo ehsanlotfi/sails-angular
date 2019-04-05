@@ -23,7 +23,7 @@ export class UsersComponent extends Auth implements OnInit {
       id: -1,
       name :'',
       LastName: '',
-      code : 0
+      code : null
     }
   }
 

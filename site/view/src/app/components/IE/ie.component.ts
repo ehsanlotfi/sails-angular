@@ -43,7 +43,7 @@ export class IEComponent extends Auth  implements OnInit {
 
   getAllIEs() {
     this.groupIEs= [];
-    this.api.getAllIEs(this.api.user.loginId).subscribe((res:IE[])=>{
+    this.api.getAllIEs(this.api.user().loginId).subscribe((res:IE[])=>{
       this.IEs = res;
       res = _.uniqBy( res.map((f: any)=> {f.shamse = this.api.getTimeStampToJalali(f.updatedAt); return f; }) , 'shamse');
 
@@ -62,7 +62,7 @@ export class IEComponent extends Auth  implements OnInit {
       entryTime : this.IE.entryTime,
       exitTime : this.IE.exitTime,
       walk : this.IE.walk,
-      user: (this.api.user.loginId as any)
+      user: (this.api.user().loginId as any)
     }
     debugger;
     if(this.IE.id === -1){

@@ -17,6 +17,9 @@ export class ReportComponent extends Auth implements OnInit {
   IE: IE;
   groupUsers= [];
 
+  codeFilter;
+  dateFilter = '';
+
   entryHours;
   entryMinuts;
   exitHours;
@@ -28,6 +31,9 @@ export class ReportComponent extends Auth implements OnInit {
 
   ngOnInit(){
     this.groupUsers= [];
+      this.getDocumentUserAndTime(null,null);
+
+    /*
     this.api.getFullAllIEs().subscribe((res:IE[])=>{
       this.IEs  = res;
       
@@ -61,13 +67,24 @@ export class ReportComponent extends Auth implements OnInit {
       })
     
       
-    })
+    }) */
   }
 
   check(ids){
     ids.forEach( id =>{
       this.api.changeCheckIE(id).subscribe(f=>{})
     })
+  }
+
+  
+  checkDocument(id){
+    this.api.checkDocument(id).subscribe(f=>{})
+  }
+
+  getDocumentUserAndTime(user, date){
+      this.api.getDocumentUserAndDate(user, date).subscribe((res: Document[])=>{
+        this.groupUsers = res;
+      })
   }
 
   getFullTime(data, date) {

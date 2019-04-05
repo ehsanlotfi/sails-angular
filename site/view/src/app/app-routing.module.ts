@@ -9,6 +9,7 @@ import { DocumentComponent } from './components/document/document.component';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
 import { Page404Component } from './components/page-404/page-404.component';
 import { ReportComponent } from './components/report/report.component';
+import { SalaryComponent } from './components/salary/salary.component';
 
 const app: Routes = [
   { path :'users' , component : UsersComponent },
@@ -16,7 +17,8 @@ const app: Routes = [
   { path :'activity' , component : ActivityComponent },
   { path :'ie' , component : IEComponent },
   { path :'document' , component : DocumentComponent },
-  { path :'report' , component : ReportComponent }
+  { path :'report' , component : ReportComponent },
+  { path :'salary' , component : SalaryComponent }
 ];
 
 const routes: Routes = [

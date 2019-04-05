@@ -1,64 +1,57 @@
 <div class="row">
   <div class="col-12 mb-3">
       <div class="row">
-          <div class="col-4 d-inline-flex">
-              <span class="ml-1 mt-1 text-left w-50">کد ممیزی</span>
-              <input type="text" (input)="changeCode($event.currentTarget.value)" 
-              [(ngModel)]="Document.code" class="form-control form-control-sm  mb-1"  />
-          </div>
-          <div class="col-4 d-inline-flex">
-              <span class="ml-1 mt-1 text-left w-50">کلاسه</span>
-              <input type="text" 
-              [(ngModel)]="Document.class" class="form-control form-control-sm  mb-1"  />
-          </div>
-          <div class="col-4 d-inline-flex">
-              <span class="ml-1 mt-1 text-left w-50">شماره فرم</span>
-              <input type="text" 
-              [(ngModel)]="Document.formNumber" 
-              (input)="changeFormNumber($event.currentTarget.value)"
-              class="form-control form-control-sm  mb-1"  />
-          </div>
-          <div class="col-4 d-inline-flex">
-              <span class="ml-1 mt-1 text-left w-50">ثبت وضعیت</span>
-                <select [(ngModel)]="Document.status" class="form-control form-control-sm  mb-1">
-                  <option value="ثبت سیاق">ثبت سیاق</option>
-                  <option value="استخراج">استخراج</option>
-                </select>
-          </div>
-          <div class="col-4 d-inline-flex">
-              <span class="ml-1 mt-1 text-left w-50">تاریخ</span>
-              <dp-date-picker 
-              dir="rtl"
-              [(ngModel)]="Document.date"
-              mode="day"
-              theme="dp-material"
-              (onChange)="changeDate($event)"
-              placeholder="در زمان"></dp-date-picker>
-          </div>
-          <div class="col-4 d-inline-flex">
-            <span class="ml-1 mt-1 text-left w-50"  [style.fontSize.px]="15">مدت زمان(ساعت)</span>
+        <div class="col-4 d-inline-flex">
+            <span class="ml-1 mt-1 text-left w-50">کد ممیزی</span>
+            <input type="text" (input)="changeCode($event.currentTarget.value)"  required
+            [(ngModel)]="Document.code" class="form-control form-control-sm  mb-1"  />
+        </div>
+        <div class="col-4 d-inline-flex">
+            <span class="ml-1 mt-1 text-left w-50">کلاسه</span>
             <input type="text" 
-            [(ngModel)]="Document.hour"
+            [(ngModel)]="Document.class" class="form-control form-control-sm  mb-1"  />
+        </div>
+        <div class="col-4 d-inline-flex">
+            <span class="ml-1 mt-1 text-left w-50">شماره فرم</span>
+            <input type="text" 
+            [(ngModel)]="Document.formNumber" 
+            (input)="changeFormNumber($event.currentTarget.value)"
             class="form-control form-control-sm  mb-1"  />
-          </div>
-          <div class="col-12 text-left">
-              <button [disabled]="!getfillAll()" class="btn btn-primary  mt-1" (click)="save()">
-                  {{ Document.id === -1 ? 'اضافه کردن' : 'ویرایش' }}
-                </button>
-          </div>
-          <div [class.d-none]="!duplicateForm"  class="col-12">
-              <div  class="alert alert-warning mt-2" role="alert">
-                  <strong>توجه!</strong> کد ممیزی و یا شماره فرم تکراری است برای ثبت مطمئن هستید؟
-                </div>
-          </div>
-
-          <div [class.d-none]="!formSuccess" class="col-12">
-            <div  class="alert alert-success mt-2" role="alert">
-                <strong>موفقیت آمیز!</strong> ثبت فرم با موفقیت انجام شد
-            </div>
+        </div>
+        <div class="col-4 d-inline-flex">
+            <span class="ml-1 mt-1 text-left w-50">ثبت وضعیت</span>
+              <select [(ngModel)]="Document.status" class="form-control form-control-sm  mb-1">
+                <option *ngFor="let work of api.work" [value]="work.id">{{ work.name }}</option>
+              </select>
+        </div>
+        <div class="col-4 d-inline-flex">
+            <span class="ml-1 mt-1 text-left w-50">تاریخ</span>
+            <dp-date-picker 
+            dir="rtl"
+            [(ngModel)]="Document.date"
+            mode="day"
+            theme="dp-material"
+            placeholder="در زمان"></dp-date-picker>
+        </div>
+        <div class="col-4 d-inline-flex">
+          <span class="ml-1 mt-1 text-left w-50"  [style.fontSize.px]="15">مدت زمان(ساعت)</span>
+          <input type="text" 
+          [(ngModel)]="Document.hour"
+          class="form-control form-control-sm  mb-1"  />
+        </div>
+        <div class="col-12 text-left">
+            <button [disabled]="!getfillAll()" class="btn btn-primary  mt-1" (click)="save()">
+                {{ Document.id === -1 ? 'اضافه کردن' : 'ویرایش' }}
+              </button>
         </div>
 
-        </div>
+        <div [class.d-none]="!formSuccess" class="col-12">
+          <div  class="alert alert-success mt-2" role="alert">
+              <strong>موفقیت آمیز!</strong> ثبت فرم با موفقیت انجام شد
+          </div>
+      </div>
+
+      </div>
   </div>
     <div class="col-12">
       <table class="table table-dark table-striped">
@@ -79,7 +72,7 @@
             <td>{{ i + 1 }}</td>
             <td>{{ Document.code }}</td>
             <td>{{ Document.class }}</td>
-            <td>{{ Document.status }}</td>
+            <td>{{ api.work[Document.status -1 ].name }}</td>
             <td>{{ Document.formNumber }}</td>
             <td>{{ Document.user.name+ ' ' + Document.user.LastName }}</td>
             <td>{{ Document.date }}</td>

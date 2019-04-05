@@ -79,6 +79,18 @@ export class DocumentComponent extends Auth  implements OnInit {
 
 
   save(){
+    if(this.duplicateForm){
+      var valid = confirm("فرم تکراری است از ثبت آن مطمئن هستید؟");
+      if(valid){
+      this.saveToDatabase();
+      }
+    } else {
+      this.saveToDatabase();
+    }
+ 
+  }
+
+  saveToDatabase(){
     const body: Document = {
       id : this.Document.id,
       code : this.Document.code,
@@ -86,7 +98,7 @@ export class DocumentComponent extends Auth  implements OnInit {
       class : this.Document.class,
       formNumber: this.Document.formNumber,
       date : this.Document.date,
-      user: (this.api.user.loginId as any),
+      user: (this.api.user().loginId as any),
       hour: this.Document.hour
     }
     if(this.Document.id === -1){

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import * as moment from 'jalali-moment';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
+import { Router } from '@angular/router';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
@@ -55,6 +56,7 @@ export interface Document {
   count?: number;
   user?: User;
   hour?: number;
+  check?: boolean;
 }
 
 export interface Activity {
@@ -69,12 +71,30 @@ export interface Activity {
 })
 export class ApiService {
 
-  user= {
-    loginId : -1,
-    userName: '',
-    role: -1
-  }  
-  constructor(private http: HttpClient) { }
+  work = [
+    { id: 1 , name : "ثبت سیاق" },
+    { id: 2 , name : "بررسی ثبت سیاق" },
+    { id: 3 , name : "استخراج پرونده" },
+    { id: 4 , name : "بررسی استخراج پرونده" },
+  ]
+ 
+  constructor(private http: HttpClient, private route: Router) { }
+
+
+  user() {
+    let user: any = localStorage.getItem("user"); 
+    if(user){
+      user = JSON.parse(user);
+      return {
+        loginId : user.loginId,
+        userName: user.userName,
+        role: user.role,
+      }
+    } else {
+      this.route.navigate(['app/users']);
+      return null;
+    }
+  } 
 
   getAllUsers(){
       return this.http.get(apiRouter.users);
@@ -171,6 +191,18 @@ export class ApiService {
   getAllDocumentsByUserID(id: number) {
     return this.http.get(`${apiRouter.document}?where={"user": ${id} }`);
   }
+// ?where={"user": "1" ,"date":"1398-01-28"}
+  getDocumentUserAndDate(user, date){
+    if(user && date){
+      return this.http.get(`${apiRouter.document}?where={"user": "${user}","date": "${date}" }`);
+    } else if(user){
+      return this.http.get(`${apiRouter.document}?where={"user": "${user}" }`);
+    } else if(date){
+      return this.http.get(`${apiRouter.document}?where={"date": "${date}" }`);
+    } else {
+      return this.http.get(`${apiRouter.document}`);
+    }
+  }
 
   insertDocument(body: Document) {
   return  this.http.post(apiRouter.document, body)
@@ -202,6 +234,18 @@ export class ApiService {
 
   changeCheckIE(id){
     return this.http.put(`${apiRouter.ie}/${id}`,{ check: true });
+  }
+
+  checkDocument(id){
+    return this.http.put(`${apiRouter.document}/${id}`,{ check: true });
+  }
+
+  getSalary(id){
+    let salary =  localStorage.getItem("salary");
+    if(salary){
+      salary = JSON.parse(salary);
+      return salary[id];
+    }
   }
 
   // tools

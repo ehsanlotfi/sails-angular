@@ -42,8 +42,8 @@ export class TasksComponent extends Auth  implements OnInit {
 
   getAllTasks(){
     forkJoin(
-      this.api.getAllIEByUserID(+this.api.user.loginId),
-      this.api.getAllDocumentsByUserID(+this.api.user.loginId)
+      this.api.getAllIEByUserID(+this.api.user().loginId),
+      this.api.getAllDocumentsByUserID(+this.api.user().loginId)
     ).subscribe(([ies ,docs]:[ any ,any ])=> {
       var dt = moment;
       docs.map((f: any) => {

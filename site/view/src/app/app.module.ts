@@ -15,6 +15,7 @@ import { DocumentComponent } from './components/document/document.component';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
 import { Page404Component } from './components/page-404/page-404.component';
 import { ReportComponent } from './components/report/report.component';
+import { SalaryComponent } from './components/salary/salary.component';
 
 @Component({
 selector : 'app-root',
@@ -35,7 +36,8 @@ export class AppComponent {
     DocumentComponent,
     AppLayoutComponent,
     Page404Component,
-    ReportComponent
+    ReportComponent,
+    SalaryComponent
   ],
   imports: [
     BrowserModule,

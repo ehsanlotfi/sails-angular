@@ -15,6 +15,7 @@ module.exports = {
     date: { type: 'string' },
     count: { type: 'number'},
     hour: { type: 'number'},
+    check: { type: 'boolean'},
     user: {
       model: 'User'
     },
